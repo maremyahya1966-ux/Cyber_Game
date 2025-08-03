@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الأمن السيبراني</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa;
+            direction: rtl;
+            text-align: right;
+            padding: 20px;
+            color: #003366;
+        }
+
+        h1 {
+            text-align: center;
+            color: #005588;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        #signature {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #game-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #scene {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background: linear-gradient(to bottom, #87ceeb, #b0e0e6);
+            border-bottom: 3px solid #deb887;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        /* Kid and computer */
+        #desk {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 20px;
+            background-color: #8b4513;
+            border-radius: 5px;
+        }
+
+        #computer {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 100px;
+        }
+
+        #monitor {
+            width: 100px;
+            height: 80px;
+            background-color: #333;
+            margin: 0 auto;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        #screen {
+            width: 80px;
+            height: 60px;
+            background-color: #4a86e8;
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+
+        #keyboard {
+            width: 110px;
+            height: 15px;
+            background-color: #222;
+            margin: 5px auto 0;
+            border-radius: 3px;
+        }
+
+        .key {
+            display: inline-block;
+            width: 10px;
+            height: 8px;
+            background-color: white;
+            margin: 2px;
+            border-radius: 2px;
+        }
+
+        #kid {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 100px;
+        }
+
+        .head {
+            width: 40px;
+            height: 40px;
+            background-color: #ffdbac;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .eyes {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+        }
+
+        .eye {
+            width: 8px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+
+        .smile {
+            width: 20px;
+            height: 10px;
+            border-bottom: 2px solid #333;
+            border-radius: 50%;
+            margin: 5px auto 0;
+        }
+
+        .body {
+            width: 40px;
+            height: 40px;
+            background-color: #67a6d9;
+            margin: 5px auto;
+            border-radius: 5px;
+        }
+
+        .legs {
+            display: flex;
+            justify-content: space-around;
+            width: 30px;
+            margin: 0 auto;
+        }
+
+        .leg {
+            width: 10px;
+            height: 25px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        #question-box {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #0066cc;
+        }
+
+        #question {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #003366;
+            line-height: 1.6;
+        }
+
+        .choice {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 18px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            transition: all 0.3s;
+        }
+
+        .choice:hover {
+            background-color: #e6f2ff;
+            border-color: #0066cc;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 36px;
+        }
+
+        #next-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: none;
+        }
+
+        #next-btn:hover {
+            background-color: #0055aa;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #006600;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>لعبة الأمن السيبراني</h1>
+    <div id="signature">maryam yahya</div>
+
+    <div id="game-container">
+        <div id="scene">
+            <div id="desk"></div>
+            <div id="computer">
+                <div id="monitor">
+                    <div id="screen"></div>
+                </div>
+                <div id="keyboard">
+                    <span class="key"></span><span class="key"></span><span class="key"></span>
+                    <span class="key"></span><span class="key"></span><span class="key"></span>
+                </div>
+            </div>
+            <div id="kid">
+                <div class="head">
+                    <div class="eyes">
+                        <div class="eye"></div><div class="eye"></div>
+                    </div>
+                    <div class="smile"></div>
+                </div>
+                <div class="body"></div>
+                <div class="legs">
+                    <div class="leg"></div><div class="leg"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="question-box">
+            <div id="question">يتم تحميل السؤال...</div>
+            <div id="choices"></div>
+            <div id="feedback"></div>
+            <button id="next-btn">السؤال التالي</button>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "ما أفضل طريقة لاختيار كلمة مرور قوية؟",
+                choices: [
+                    "استخدام اسمك وتاريخ ميلادك",
+                    "استخدام كلمة واحدة بسيطة مثل 123456",
+                    "استخدام مزيج من الحروف، الأرقام، والرموز",
+                    "كتابة كلمة المرور على ورقة بجانب الكمبيوتر"
+                ],
+                correct: 2
+            },
+            {
+                question: "ماذا يجب أن تفعل إذا تلقيت بريدًا يطلب منك إدخال كلمة المرور؟",
+                choices: [
+                    "أدخل كلمة المرور فورًا",
+                    "انقر على الرابط وأتحقق من الموقع",
+                    "أحذف البريد أو أبلغ عنه",
+                    "أرسل كلمة المرور إلى المرسل"
+                ],
+                correct: 2
+            },
+            {
+                question: "ما هو الجدار الناري (Firewall)؟",
+                choices: [
+                    "جهاز يمنع الحريق في المكتب",
+                    "برنامج يحمي الكمبيوتر من الهجمات",
+                    "موقع ويب للدردشة",
+                    "برنامج لتشغيل الألعاب"
+                ],
+                correct: 1
+            },
+            {
+                question: "هل يُسمح لك بمشاركة حسابك مع أصدقائك؟",
+                choices: [
+                    "نعم، خاصة مع الأصدقاء المقربين",
+                    "لا، كل حساب خاص بالمستخدم فقط",
+                    "نعم، إذا كنت تثق بهم تمامًا",
+                    "أحيانًا فقط"
+                ],
+                correct: 1
+            },
+            {
+                question: "ماذا تفعل عند رؤية رسالة 'تحديث برنامج مطلوب' من موقع غير معروف؟",
+                choices: [
+                    "أضغط على التحديث فورًا",
+                    "أتجاهل التحديث",
+                    "أتحقق من مصدر الرسالة قبل التحديث",
+                    "أستخدم كمبيوتر شخص آخر"
+                ],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let feedbackElement = document.getElementById("feedback");
+        let nextBtn = document.getElementById("next-btn");
+        let resultElement = document.getElementById("result");
+        let choicesDiv = document.getElementById("choices");
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById("question").textContent = q.question;
+            choicesDiv.innerHTML = "";
+
+            q.choices.forEach((choice, index) => {
+                const button = document.createElement("button");
+                button.textContent = choice;
+                button.className = "choice";
+                button.onclick = () => checkAnswer(index);
+                choicesDiv.appendChild(button);
+            });
+
+            feedbackElement.textContent = "";
+            nextBtn.style.display = "none";
+        }
+
+        function checkAnswer(selectedIndex) {
+            const q = questions[currentQuestion];
+            const allButtons = document.querySelectorAll(".choice");
+            
+            // Disable all buttons after click
+            allButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedIndex === q.correct) {
+                feedbackElement.innerHTML = '<span style="color: green;">✅ صحيح!</span>';
+            } else {
+                feedbackElement.innerHTML = '<span style="color: red;">❌ خطأ!</span>';
+                // Highlight correct answer
+                allButtons[q.correct].style.backgroundColor = "#d4edda";
+                allButtons[q.correct].style.borderColor = "green";
+            }
+
+            nextBtn.style.display = "block";
+        }
+
+        nextBtn.onclick = () => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                // Game finished
+                document.getElementById("question").textContent = "أكملت جميع الأسئلة! جزاك الله خيرًا 🌟";
+                choicesDiv.innerHTML = "";
+                feedbackElement.textContent = "";
+                nextBtn.style.display = "none";
+                resultElement.style.display = "block";
+                resultElement.textContent = "لقد أجبت على 5 من 5 أسئلة. أحسنت!";
+            }
+        };
+
+        // Start the game
+        loadQuestion();
+    </script>
+
+</body>
+</html>
